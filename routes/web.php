@@ -21,12 +21,35 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
-Route::get('/create',[PostController::class,'index']);
+// Route::get('/posts',[PostController::class,'index'])->name('posts.index');
 
-Route::get('/view',[PostController::class,'store']);
+// Route::get('/view',[PostController::class,'store']);
 
-Route::post('/create',[PostController::class,'store']);
+// Route::post('/create',[PostController::class,'store'])->name('posts.store');
 
-Route::get('/view',function(){
-    return view('viewpost');
+// Route::get('/view',[PostController::class,'view']);
+
+// Route::get('/create', [PostController::class,'create'])->name('posts.create');
+
+// Route::middleware('auth')->group(function(){
+//     Route::get('/create',[PostController::class,'create'])->name('posts.create');
+//     Route::post('/create', [PostController::class, 'store'])->name('posts.store');
+//     Route::get('/view', [PostController::class, 'view'])->name('posts.view');
+// });
+// Route::get('posts/{id}/edit',[PostController::class,'edit'])->name('posts.edit');
+
+// Route::put('posts/{id}', [PostController::class,'update'])->name('posts.update');
+
+// Route::delete('/posts/{id}',[PostController::class,'destroy'])->name('posts.delete');
+
+
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::post('/create', [PostController::class, 'store'])->name('posts.store');
+Route::get('/view', [PostController::class, 'view'])->name('posts.view');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/create', [PostController::class, 'create'])->name('posts.create');
+    Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
+    Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
+    Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.delete');
 });

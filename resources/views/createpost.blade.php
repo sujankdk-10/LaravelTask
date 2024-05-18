@@ -8,7 +8,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<form method="post" action="{{url('/')}}/create" enctype="multipart/form-data">
+<form method="post" action="{{route('posts.store')}}" enctype="multipart/form-data">
 @csrf
 <div class="container mt-5">
     <h1 class="mb-4">Create Post</h1>
