@@ -49,10 +49,10 @@ class PostController extends Controller
     public function view()
     {
        
-
-         $posts = Post::with('user')->get();
+        $user = Auth::user();
+         $posts = Post::with('comments.user')->get();
         
-        return view('viewpost',['posts'=>$posts]);
+        return view('viewpost',['user' => $user,'posts'=>$posts]);
 
     }
     public function edit($id)

@@ -48,12 +48,26 @@
                
                     <!-- Comment section -->
             <div class="mt-3">
-                <form>
+                <h6>Comments</h6>
+                @foreach ($post->comments as $comment)
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <p class="card-text"><strong>{{$comment->user->name}}: </strong>{{$comment->content}}</p>
+                    </div>
+                </div>    
+                @endforeach
+                
+                
+                @auth
+                <form action="{{route('comments.store')}}" method='POST'>
+                    @csrf
                     <div class="form-group">
-                        <textarea class="form-control" rows="1" placeholder="Write a comment"></textarea>
+                        <textarea class="form-control"  name="content" rows="1" placeholder="Write a comment"></textarea>
+                        <input type="hidden" name="post_id" value="{{$post->id}}">
                     </div>
                     <button type="submit" class="btn btn-primary btn-sm">Add Comment</button>
                 </form>
+                @endauth
             </div>
         </div>
     </div>
