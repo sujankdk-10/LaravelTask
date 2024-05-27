@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Post</title>
     <!-- Bootstrap CSS -->
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -16,7 +17,7 @@
         <div class="card-body">
             <form>
                 <div class="form-group">
-                    <label for="description">Description:</label>
+                    <label for="description">What's in your mind?</label>
                     <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                 </div>
                 <div class="form-group">
