@@ -10,7 +10,7 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        $posts = Post::With('user','comments.user')->get(); 
+        $posts = Post::With('user','comments.user')->orderBy('created_at','desc')->get(); 
         return view('admin.index', compact('posts'));
     }
 }

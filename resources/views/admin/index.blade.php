@@ -155,7 +155,8 @@
               <div class="card-header">
                 <h3 class="card-title">Create Post</h3>
               </div>
-              <form>
+              <form method="POST" action="{{route('posts.store')}}" enctype="multipart/form-data">
+                @csrf
                 <div class="card-body">
                   <div class="form-group">
                       <label for="description">What's in your mind?</label>
@@ -192,7 +193,7 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('admin-assets/dist/js/comments.js') }}">
-$.widget.bridge('uibutton', $.ui.button)
-</script>
+<script src="{{ asset('admin-assets/dist/js/comments.js') }}"></script>
+<script src="{{ asset('admin-assets/dist/js/imagefile.js') }}"></script>
+<script src="{{ asset('admin-assets/dist/js/activetab.js') }}"></script>
 @endsection

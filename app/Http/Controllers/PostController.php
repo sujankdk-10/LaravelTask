@@ -12,7 +12,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('created_at','desc')->get();
         return view('viewpost',['posts'=>$posts]);
 
     }
@@ -27,12 +27,15 @@ class PostController extends Controller
 
     public function store(Request $request)
     {   
-        // echo "<pre>";
-        // print_r($request->all());
+        $request->validate([
+            'description' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg',
+        ]);
      
         $post = new Post();
         $post->description = $request->description;
         $post->user_id = Auth::id();
+
         if ($request->hasFile('image')){
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
@@ -43,18 +46,17 @@ class PostController extends Controller
         $post->save();
 
         
-        return redirect('/view');
+        return redirect()->back()->with('success','Post created successfully.')->with('active_tab','postfeed');
     }
 
     public function view()
     {
-       
         $user = Auth::user();
-         $posts = Post::with('comments.user')->get();
+        $posts = Post::with('comments.user')->orderByDesc('created_at')->get();
         
-        return view('viewpost',['user' => $user,'posts'=>$posts]);
-
+        return view('viewpost', ['user' => $user, 'posts' => $posts]);
     }
+
     public function edit($id)
     {
         $post = Post::findOrFail($id);
