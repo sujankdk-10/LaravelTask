@@ -12,8 +12,9 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::orderBy('created_at','desc')->get();
-        return view('viewpost',['posts'=>$posts]);
+        $user = Auth::user();
+        $posts = Post::with('comments.user')->orderByDesc('created_at')->get();
+        return view('viewpost', ['user' => $user, 'posts' => $posts]);
 
     }
 
@@ -49,13 +50,13 @@ class PostController extends Controller
         return redirect()->back()->with('success','Post created successfully.')->with('active_tab','postfeed');
     }
 
-    public function view()
-    {
-        $user = Auth::user();
-        $posts = Post::with('comments.user')->orderByDesc('created_at')->get();
+    // public function view()
+    // {
+    //     $user = Auth::user();
+    //     $posts = Post::with('comments.user')->orderByDesc('created_at')->get();
         
-        return view('viewpost', ['user' => $user, 'posts' => $posts]);
-    }
+    //     return view('viewpost', ['user' => $user, 'posts' => $posts]);
+    // }
 
     public function edit($id)
     {

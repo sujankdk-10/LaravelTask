@@ -6,14 +6,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/index', function(){
-    return view('index');
-});
+Route::get('/', [PostController::class, 'index'])->name('posts.index');
+Route::post('/create', [PostController::class, 'store'])->name('posts.store');
 
 
 Route::get('/admin/dashboard', [AdminController::class,'dashboard'])
@@ -37,12 +31,5 @@ require __DIR__.'/auth.php';
 
 
 
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-Route::post('/create', [PostController::class, 'store'])->name('posts.store');
-Route::get('/view', [PostController::class, 'view'])->name('posts.view');
-
-Route::middleware('auth')->group(function () {
-    
-});
 
 
